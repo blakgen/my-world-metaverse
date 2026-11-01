@@ -192,11 +192,6 @@ class WorldScene extends Phaser.Scene {
   }
 }
 
-new Phaser.Game({
-  type: Phaser.AUTO,
-  parent: "game",
-  width: 1100,
-  height: 620,
 
 new Phaser.Game({
     type: Phaser.AUTO,
@@ -210,8 +205,10 @@ new Phaser.Game({
             debug: false
         }
     },
-    scale: { mode: Phaser.Scale.FIT, autoCenter: Phaser.Scale.CENTER_BOTH },
+    scale: {
+        mode: Phaser.Scale.FIT,
+        autoCenter: Phaser.Scale.CENTER_BOTH
+    },
     scene: [WorldScene]
 });
 
-});
