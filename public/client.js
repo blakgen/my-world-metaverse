@@ -197,7 +197,21 @@ new Phaser.Game({
   parent: "game",
   width: 1100,
   height: 620,
-  backgroundColor: "#83c879",
-  scale: { mode: Phaser.Scale.FIT, autoCenter: Phaser.Scale.CENTER_BOTH },
-  scene: [WorldScene]
+
+new Phaser.Game({
+    type: Phaser.AUTO,
+    parent: "game",
+    width: 1100,
+    height: 620,
+    backgroundColor: "#83c879",
+    physics: {
+        default: "arcade",
+        arcade: {
+            debug: false
+        }
+    },
+    scale: { mode: Phaser.Scale.FIT, autoCenter: Phaser.Scale.CENTER_BOTH },
+    scene: [WorldScene]
+});
+
 });
