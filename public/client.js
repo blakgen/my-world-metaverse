@@ -1,3 +1,31 @@
+
+// 모바일 터치 방향 입력
+const touchMove = {
+    up: false,
+    down: false,
+    left: false,
+    right: false
+};
+
+document.querySelectorAll("#mobile-controls button").forEach(button => {
+    const direction = button.dataset.dir;
+
+    button.addEventListener("pointerdown", event => {
+        event.preventDefault();
+        touchMove[direction] = true;
+        button.setPointerCapture(event.pointerId);
+    });
+
+    const stop = event => {
+        event.preventDefault();
+        touchMove[direction] = false;
+    };
+
+    button.addEventListener("pointerup", stop);
+    button.addEventListener("pointercancel", stop);
+    button.addEventListener("lostpointercapture", stop);
+});
+
 const socket = io();
 const connectionDot = document.getElementById("connectionDot");
 const connectionText = document.getElementById("connectionText");
@@ -175,10 +203,12 @@ class WorldScene extends Phaser.Scene {
     const me = playerData.get(selfId);
     if (!me) return;
     let dx = 0, dy = 0;
-    if (this.keys.A.isDown || this.cursors.left.isDown) dx -= 1;
-    if (this.keys.D.isDown || this.cursors.right.isDown) dx += 1;
-    if (this.keys.W.isDown || this.cursors.up.isDown) dy -= 1;
-    if (this.keys.S.isDown || this.cursors.down.isDown) dy += 1;
+    
+if (this.keys.A.isDown || this.cursors.left.isDown || touchMove.left) dx -= 1;
+if (this.keys.D.isDown || this.cursors.right.isDown || touchMove.right) dx += 1;
+if (this.keys.W.isDown || this.cursors.up.isDown || touchMove.up) dy -= 1;
+if (this.keys.S.isDown || this.cursors.down.isDown || touchMove.down) dy += 1;
+
     if (dx || dy) {
       const len = Math.hypot(dx, dy) || 1;
       me.x = Phaser.Math.Clamp(me.x + (dx / len) * 220 * (this.game.loop.delta / 1000), 24, world.width - 24);
