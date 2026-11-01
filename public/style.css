@@ -35,3 +35,44 @@ button:hover { filter: brightness(1.08); }
 .guide .small { color: #7e91ab; font-size: 12px; }
 footer { color: #71839c; font-size: 12px; text-align: center; padding: 18px 0 4px; }
 @media (max-width: 720px) { .app { padding: 10px; } .bottom { grid-template-columns: 1fr; } .name-card { right: 7px; top: 7px; } .name-card label { display: none; } .name-card input { width: 80px; } .brand { font-size: 21px; } .help { font-size: 10px; } }
+
+/* 모바일 방향 조작 버튼 */
+#mobile-controls {
+    display: none;
+    position: fixed;
+    bottom: 25px;
+    left: 20px;
+    z-index: 9999;
+    touch-action: none;
+    user-select: none;
+}
+
+.control-row {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+#mobile-controls button {
+    width: 58px;
+    height: 58px;
+    border: 1px solid #65d6b0;
+    border-radius: 14px;
+    background: rgba(25, 45, 65, 0.9);
+    color: white;
+    font-size: 23px;
+    font-weight: bold;
+    touch-action: none;
+    user-select: none;
+}
+
+#mobile-controls button:active {
+    background: #42bd98;
+}
+
+@media (pointer: coarse), (max-width: 700px) {
+    #mobile-controls {
+        display: block;
+    }
+}
